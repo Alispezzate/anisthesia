@@ -4,15 +4,15 @@
 
 namespace anisthesia::win {
 
-struct Process;
-struct Window;
+	struct Process;
+	struct Window;
 
-namespace detail {
+	namespace detail {
 
-using window_proc_t = std::function<bool(const Process&, const Window&)>;
+		using window_proc_t = std::function<bool(const Process&, const Window&)>;
 
-bool EnumerateWindows(window_proc_t window_proc);
+		extern "C" ANISTHESIA_API bool EnumerateWindows(window_proc_t window_proc);
 
-}  // namespace detail
+	}  // namespace detail
 
 }  // namespace anisthesia::win
