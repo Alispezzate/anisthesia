@@ -3,14 +3,18 @@
 #include <string>
 
 #include <anisthesia/util.hpp>
+#include <iostream>
 
 namespace anisthesia::detail::util {
 
 	bool ReadFile(const std::string& path, std::string& data) {
+		std::cerr << "ReadFile" << std::endl;
 		std::ifstream file(path.c_str(), std::ios::in | std::ios::binary);
 
-		if (!file)
+		if (!file) {
+			std::cerr << "Failed to open file: " << path << std::endl;
 			return false;
+		}
 
 		file.seekg(0, std::ios::end);
 		data.resize(static_cast<size_t>(file.tellg()));
@@ -18,9 +22,10 @@ namespace anisthesia::detail::util {
 
 		file.read(&data.front(), data.size());
 		file.close();
-
+		std::cerr << "ReadFile end" << std::endl;
 		return true;
 	}
+
 
 	bool EqualStrings(const std::string& str1, const std::string& str2) {
 		auto lower_char = [](const char c) -> char {

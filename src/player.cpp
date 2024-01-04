@@ -2,6 +2,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include <anisthesia/player.hpp>
 #include <anisthesia/util.hpp>
@@ -156,8 +157,10 @@ namespace anisthesia {
 	////////////////////////////////////////////////////////////////////////////////
 
 	bool ParsePlayersData(const std::string& data, std::vector<Player>& players) {
-		if (data.empty())
+		if (data.empty()){
+			std::cerr << "Empty players data." << std::endl;
 			return false;
+		}
 
 		std::istringstream stream(data);
 		std::string line;
@@ -176,11 +179,15 @@ namespace anisthesia {
 			if (line.empty() || line.front() == '#')
 				continue;  // Ignore empty lines and comments
 
-			if (!detail::parser::HandleIndentation(indentation, players, state))
+			if (!detail::parser::HandleIndentation(indentation, players, state)){
+				std::cerr << "Invalid indentation." << std::endl;
 				return false;
+			}
 
-			if (!detail::parser::HandleState(line, players, state))
+			if (!detail::parser::HandleState(line, players, state)){
+				std::cerr << "Invalid state." << std::endl;
 				return false;
+			}
 		}
 
 		return !players.empty();
@@ -189,8 +196,10 @@ namespace anisthesia {
 	bool ParsePlayersFile(const std::string& path, std::vector<Player>& players) {
 		std::string data;
 
-		if (!detail::util::ReadFile(path, data))
+		if (!detail::util::ReadFile(path, data)){
+			std::cerr << "Failed to read players file: " << path << std::endl;
 			return false;
+		}
 
 		return ParsePlayersData(data, players);
 	}
