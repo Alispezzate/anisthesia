@@ -5,8 +5,8 @@
 
 #include <windows.h>
 
-#include <anisthesia/media.hpp>
-#include <anisthesia/player.hpp>
+#include "media.hpp"
+#include "player.hpp"
 
 namespace anisthesia::win {
 

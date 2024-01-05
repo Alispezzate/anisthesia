@@ -10,4 +10,4 @@
 #include <anisthesia/player.hpp>
 #include <anisthesia/win_platform.hpp>
 
-extern "C" ANISTHESIA_API int AnisthesiaInit();
+extern "C" ANISTHESIA_API int anisthesiaInit();

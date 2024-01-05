@@ -3,7 +3,7 @@
 #include <vector>
 //TODO: move file to src/anisthesia.cpp
 
-int AnisthesiaInit()
+int anisthesiaInit()
 {
     std::vector<anisthesia::Player> players;
     if (!anisthesia::ParsePlayersFile("data/players.anisthesia", players)) {
